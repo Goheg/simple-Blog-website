@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Blog Website</title>
+    <link rel="stylesheet" href="/styles/index.css">
+</head>
+<body>
+    <header>
+        <h1>Simple Blog Website</h1>
+    </header>
+    <div class="container">
+        <form class="blog-form" id="blogForm" action="/submit" method="POST">
+            <h2>Create a New Blog Post</h2>
+            <input type="text" name="title" id="blogTitle" placeholder="Blog Title" required>
+            <textarea id="blogContent" name="content" placeholder="Write your blog content here..." rows="5" required></textarea>
+            <button type="submit">Post Blog</button>
+        </form>
+
+        <h2>All Blogs</h2>
+        <ul class="blog-list" id="blogList">
+            <!-- Blog entries will be dynamically added here -->
+             <% if (locals.blog) { %>
+                <% for( let i = 0;i < blog.length;i++ ) { %>
+                    <li class="blog-item">
+                        <span class="blog-title"></span>
+                            <a href="/read/<%= blog[i].id %>">
+                                <%= blog[i].title %>
+                            </a>
+                        </span>
+                        <div class = "actions">
+                            <button><a href="/edit/<%= blog[i].id %>">edit</a></button>
+                            <button><a href="/delete/<%- blog[i].id %>">delete</a></button>
+                        </div>
+                        
+                    </li>
+                <% } %>
+             <% } %>
+        </ul>
+    </div>
+
+   
+</body>
+</html>
